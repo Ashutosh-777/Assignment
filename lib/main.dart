@@ -58,18 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState(){
     scrollController.addListener(_scrolllistener);
-    _loadPosts();
     super.initState();
-  }
-  Future<void> _loadPosts() async {
-    try {
-      List<Post> loadedPosts = await context.read<PostProvider>().getPosts();
-      setState(() {
-        posts = loadedPosts;
-      });
-    } catch (error) {
-      // Handle error as needed
-    }
   }
   @override
   Widget build(BuildContext context) {
@@ -86,7 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
             } else if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator(),);
             }
-            print("______00000");
             print(snapshot.data!.length);
             return ListView.builder(
               controller: scrollController,
